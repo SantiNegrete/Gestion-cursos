@@ -1,0 +1,84 @@
+/* CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    overflow: hidden;
+}
+
+#fondo-imagen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+}
+
+header {
+    background-color: #56070c;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    transition: all 1s ease;
+}
+
+h1 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+img{
+    width: 450px;
+    height: 400px;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    background-color: #001F3F;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    transition: all 1s ease;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+:hover.fixed{
+    background-color: #003366;
+}
+.fixed a {
+    color: white;
+    text-decoration: none;
+}
+
+.fixed a:hover {
+    color: #ddd;
+}
+
+.max-w-7xl {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.max-w-7xl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
