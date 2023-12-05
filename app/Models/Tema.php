@@ -70,5 +70,11 @@ class Tema extends Model
     {
         return $this->belongsTo('App\Models\Instrumentacion', 'instrumentacion_id', 'id');
     }
+
+    public function configuracionDocente()
+    {
+        return $this->hasOne(ConfiguracionDocente::class, 'tema_id');
+    }
+    
 }
 

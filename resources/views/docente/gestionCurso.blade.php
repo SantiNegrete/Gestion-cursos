@@ -104,87 +104,8 @@
     </div>
 </nav>
 
-<form method="POST" action="{{ route('docente.guardarConfiguracion', ['asignatura' => $asignatura->id, 'unidadId' => $unidadActual->id]) }}">
-    @csrf
-    <div class="container mt-3">
-        <h2>Unidad: {{ $unidadActual->nombre }}</h2>
-        <p>Objetivo: {{ $unidadActual->objetivo }}</p>
-    
-        <div class="row">
-            <div class="col-md-6">
-                <div class="list-group">
-                    @foreach ($unidadActual->temas as $tema)
-                        <div class="list-group-item">
-                            <h5 class="mb-1">{{ $tema->nombre }}</h5>
-                            <small>Semana programada</small>
-                            <select name="temas[{{ $tema->id }}][calendario_id]" class="form-control mt-2">
-                                <option value="" disabled selected>Selecciona Semana</option>
-                                @foreach ($calendarios as $calendario)
-                                    <option value="{{ $calendario->id }}" {{ (isset($configuracionesGuardadas[$tema->id]) && $configuracionesGuardadas[$tema->id]->calendario_id == $calendario->id) ? 'selected' : '' }}>
-                                        {{ $calendario->nombre_completo }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            
-    
-            {{-- Sección para evaluación de la competencia e instrumentaciones --}}
-            <div class="col-md-6">
-                <div class="list-group">
-                <div class="list-group-item">
-                    <h5 class="mb-1">Evaluación de la competencia</h5>
-                    <small>Semana de evaluación</small>
-                    <select name="evaluacion_competencia[calendario_id]" class="form-control mt-2">
-                        <option value="" disabled selected>Selecciona Semana</option>
-                        @foreach ($calendarios as $calendario)
-                            <option value="{{ $calendario->id }}" {{ (isset($configuracionesGuardadas['evaluacion_competencia']) && $configuracionesGuardadas['evaluacion_competencia']->calendario_id == $calendario->id) ? 'selected' : '' }}>
-                                {{ $calendario->nombre_completo }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                {{-- Instrumentaciones --}}
-                @for ($i = 1; $i <= 3; $i++)
-                    <div class="list-group-item">
-                        <h5 class="mb-1">Instrumentación</h5>
-                        <small>Instrumento {{ $i }}</small>
-                        <select name="instrumentaciones[{{ $i }}][instrumentacion_id]" class="form-control mt-2">
-                            <option value="" disabled selected>Selecciona Instrumentación</option>
-                            @foreach ($instrumentaciones as $instrumentacion)
-                                <option value="{{ $instrumentacion->id }}" 
-                                    {{ (isset($instrumentacionGuardada[$instrumentacion->id]) && $instrumentacionGuardada[$instrumentacion->id]->instrumentacion_id == $instrumentacion->id) ? 'selected' : '' }}>
-                                    {{ $instrumentacion->tipo_instrumentacion }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endfor
-                </div>
-            </div>
-        </div>
-    
-        <div class="mb-3">
-            @if ($unidadAnterior)
-                <a href="{{ route('docente/gestionCurso', ['asignatura' => $asignatura->id, 'unidadId' => $unidadAnterior->id]) }}" class="btn btn-custom">
-                    <i class="fas fa-arrow-left"></i> Unidad Anterior
-                </a>
-            @endif
-            @if ($unidadSiguiente)
-                <a href="{{ route('docente/gestionCurso', ['asignatura' => $asignatura->id, 'unidadId' => $unidadSiguiente->id]) }}" class="btn btn-custom">
-                    <i class="fas fa-arrow-right"></i> Unidad Siguiente
-                </a>
-            @endif
-            <button type="submit" class="btn btn-custom">
-                <i class="fas fa-save"></i> Guardar
-            </button>
-        </div>
-        
-    
-    </div>
-</form>
+<livewire:professor.professor.professor-create  :asignatura="$asignatura->id"  />
+
 
 
 

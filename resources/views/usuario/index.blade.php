@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
-    @livewire('admin.usuarios-index')
+
+    <livewire:admin.user.user-index />
 
 @stop

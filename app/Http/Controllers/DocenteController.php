@@ -37,14 +37,16 @@ class DocenteController extends Controller
     public function guardarConfiguracion(Request $request, Asignatura $asignatura, $unidadId)
     {
         // Validar datos del request
-        $request->validate([
-            'temas' => 'required|array',
-            'temas.*.calendario_id' => 'required|exists:calendarios,id',
-            'evaluacion_competencia.calendario_id' => 'nullable|exists:calendarios,id',
-            'instrumentaciones' => 'array',
-            'instrumentaciones.*.instrumentacion_id' => 'nullable|exists:instrumentaciones,id',
-        ]);
+        // $request->validate([
+        //     'temas' => 'required|array',
+        //     'temas.*.calendario_id' => 'required|exists:calendario,id',
+        //     'evaluacion_competencia.calendario_id' => 'nullable|exists:calendario,id',
+        //     'instrumentaciones' => 'array',
+        //     'instrumentacion.*.instrumentacion_id' => 'nullable|exists:instrumentacion,id',
+        // ]);
     
+
+        // return "hola";
     // Guardar configuraciones de temas
     foreach ($request->input('temas', []) as $temaId => $data) {
         ConfiguracionDocente::updateOrCreate(

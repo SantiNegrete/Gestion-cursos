@@ -65,6 +65,10 @@ class Unidade extends Model
         return $this->hasMany(Tema::class, 'id_unidad');
         return $this->hasMany('App\Models\Tema', 'id_unidad', 'id');
     }
+    public function configuracionesDocentes()
+    {
+        return $this->hasMany(ConfiguracionDocente::class, 'unidad_id');
+    }
     
 
 }

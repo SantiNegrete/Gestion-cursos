@@ -17,9 +17,11 @@ class ConfiguracionDocente extends Model
         'docente_id',
         'asignatura_id',
         'tema_id',
+        'fecha_tema',
         'calendario_id',
         'instrumentacion_id',
         'unidad_id', 
+        'instrumentacion', 
     ];
     
 
