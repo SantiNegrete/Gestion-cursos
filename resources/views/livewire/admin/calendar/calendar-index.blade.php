@@ -29,6 +29,7 @@
 
                         <div class="w-25">
                             <select name="" id="" class="form-control" wire:model.live="numPage">
+                                <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="30">30</option>

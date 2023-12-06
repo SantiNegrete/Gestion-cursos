@@ -71,7 +71,7 @@
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
-                                    
+                                    <th>ID</th>
                                     <th>Docente</th>
                                     <th>Curso Asignado </th>
 
@@ -81,7 +81,7 @@
                             <tbody>
                                 @foreach ($asignaciones as $asignacione)
                                     <tr>
-                                       
+                                        <td>{{ $asignacione->usuario->id }}</td>
                                         <td>{{ $asignacione->usuario->name ?? 'Nombre no disponible' }}</td>
                                         {{-- Asegúrate de que 'name' es el campo que contiene el nombre del profesor --}}
                                         <td>{{ $asignacione->asignatura->nombre ?? 'Nombre no disponible' }}</td>

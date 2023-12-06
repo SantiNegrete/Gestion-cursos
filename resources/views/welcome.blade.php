@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestión de Cursos - TecNM-Instituto Tecnológico de Morelia</title>
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/styles.css', 'resources/js/script.js'])
 
   
 </head>
