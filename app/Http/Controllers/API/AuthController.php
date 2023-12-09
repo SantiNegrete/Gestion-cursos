@@ -21,11 +21,21 @@ class AuthController extends Controller {
     
         $usuario = Usuario::where('email', $request->input('email'))->firstOrFail();
         $token = $usuario->createToken('auth_token')->plainTextToken;
+
+
+
+        if ($usuario->hasRole('Docente')) {
+            return response()->json([
+                'message' => '¡Hola, ' . $usuario->name . '!',
+                'token' => $token,
+            ]);
+        }
+        else{
+            return response()->json(['message' => 'No autorizado para acceder'], 403);
+
+        }
     
-        return response()->json([
-            'message' => '¡Hola, ' . $usuario->name . '!',
-            'token' => $token,
-        ]);
+       
     }
 
     
