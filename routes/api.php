@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AsignaturasAPIController;
 use App\Http\Controllers\API\UnidadesAPIController;
 use App\Http\Controllers\API\TemasAPIController;
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\API\AuthAPIController;
 
 
 // Ruta para AuthAPIController
-Route::post('login', [AuthAPIController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
