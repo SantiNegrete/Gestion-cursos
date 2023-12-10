@@ -36,10 +36,13 @@ class DashboardTeacherController extends Controller
     }
 
 
-    public function gestion(Request $request){
+    public function gestion($id_materia){
  
+
+       
+
         $unidadId = null;
-        $asignatura = Asignatura::findOrFail(2);
+        $asignatura = Asignatura::findOrFail($id_materia);
 
        $unidades = $asignatura->unidades()->with('temas.calendario', 'temas.instrumentacion')->get();
       
@@ -47,40 +50,57 @@ class DashboardTeacherController extends Controller
          
         $instrumentaciones = Instrumentacion::all();
 
-        $unidadActual = $unidadId ? $unidades->where('id', $unidadId)->first() : $unidades->first();
-        $temas =$unidadActual->temas;
+        $configuracionDocente = ConfiguracionDocente::all();
 
-         
-        if(!$unidadActual) {
-            return redirect()->back()->withErrors('Unidad no encontrada');
+      /*  $unidadActual = $unidadId ? $unidades->where('id', $unidadId)->first() : $unidades->first();
+        $temas =$unidadActual->temas;*/
+
+
+        if ($asignatura) {
+            $unidades = $asignatura->unidades;
+            $numUnidades = $asignatura->unidades()->pluck('id')->toArray();
+            $unidadActual = $unidades->first();
+            $temas = $unidadActual->temas;
+            
+
+          
         }
-    
-        $index = $unidades->search(fn($unidad) => $unidad->id === $unidadActual->id);
-        $unidadAnterior = $unidades->get($index - 1);
-        $unidadSiguiente = $unidades->get($index + 1);
 
-        $configuracionesGuardadas = ConfiguracionDocente::where('docente_id', auth()->id())
-                                                        ->where('asignatura_id', $asignatura->id)
-                                                        ->get()
-                                                        ->keyBy('tema_id');
+        
+
+       // $configuracionesGuardadas = ConfiguracionDocente::where('docente_id', auth()->id())
+                                                      //  ->where('asignatura_id', $asignatura->id)
+                                                        //->get()
+                                                        //->keyBy('tema_id');
     
 
         
         return response()->json([
 
             'asignatura' => $asignatura,
-           'unidadActual' => $unidadActual,
-            'unidadAnterior' => $unidadAnterior,
-            'unidadSiguiente' => $unidadSiguiente,
-            'calendarios' => $calendarios,
+             'unidadActual' => $unidadActual,
+           // 'unidadAnterior' => $unidadAnterior,//no
+            //'unidadSiguiente' => $unidadSiguiente,//no
+             'calendarios' => $calendarios,
             'instrumentaciones' => $instrumentaciones,
-            'configuracionesGuardadas' => $configuracionesGuardadas,
-            'temas' => $temas,
+           // 'configuracionesGuardadas' => $configuracionesGuardadas,//mp
+             'temas' => $temas,
+
+            'unidades' =>  $unidades,
+            'numUnidades'  => $numUnidades,
+
+            'configuracionDocente' =>  $configuracionDocente,
+        
+            
+
+
+            
 
 
             
            
         ]);
+        
 
        /* return response([
             'message' => '123'
