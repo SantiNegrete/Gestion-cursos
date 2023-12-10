@@ -7,6 +7,7 @@ use App\Http\Controllers\API\UnidadesAPIController;
 use App\Http\Controllers\API\TemasAPIController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\AuthController;
+use \App\Http\Controllers\API\DashboardTeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,15 @@ use App\Http\Controllers\API\AuthController;
 
 // Ruta para AuthAPIController
 Route::post('login', [AuthController::class, 'login']);
+
+//Route::get('dashboardTeacher', [DashboardTeacherController::class, 'dashboardTeacher']);
+
+Route::get('dashboardTeacher', [DashboardTeacherController::class, 'dashboardTeacher'])->middleware('auth:sanctum');
+Route::get('gestion', [DashboardTeacherController::class, 'gestion'])->middleware('auth:sanctum');
+
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
