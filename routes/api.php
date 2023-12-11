@@ -31,7 +31,10 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::get('dashboardTeacher', [DashboardTeacherController::class, 'dashboardTeacher'])->middleware('auth:sanctum');
 Route::get('/gestion/{id_materia}', [DashboardTeacherController::class, 'gestion'])->middleware('auth:sanctum');
-Route::post('/gestion/update', [DashboardTeacherController::class, 'actualizar']);
+Route::post('/gestion/update', [DashboardTeacherController::class, 'actualizar'])->middleware('auth:sanctum');
+
+
+//Route::post('/gestion/update', [DashboardTeacherController::class, 'actualizar']);
 
 
 

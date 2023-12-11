@@ -146,13 +146,63 @@ foreach ($instrumentacionForm as $id) {
 
     public function actualizar(Request $request)
     {
-        // Puedes acceder a los datos enviados desde el frontend así:
+       
         $datosJSON = $request->input('data');
+        $datosArray = json_decode($datosJSON, true);
+       
+         $temas =  $datosArray[0]['temas']; 
+         $item = 0;
+        foreach ($temas as $i => $tema) {
 
-        // Realiza la lógica de actualización o cualquier otra acción que necesites
+        
+     
 
-        // Devuelve una respuesta, por ejemplo:
-        return response()->json(['mensaje' => 'Actualización exitosa']);
+          $configuracionDocente = ConfiguracionDocente::where('tema_id', $tema['id'])->first();
+
+         
+          $configuracionDocente ? $configuracionDocente  :  $configuracionDocente = new ConfiguracionDocente();
+
+
+          $user = Auth::user();
+
+          $configuracionDocente->docente_id  = $user->id;
+
+          
+          $configuracionDocente->tema_id   =  $tema['id'];
+
+          
+      //   $configuracionDocente->fecha_tema   =  $temas[0]['fecha_tema'] ;
+         $configuracionDocente->fecha_tema   = $datosArray[$item]['calendarioId'];
+
+            $item = $item + 1;
+
+         
+          
+          $configuracionDocente->asignatura_id  =  $datosArray[0]['asignatura'];
+
+          
+          $configuracionDocente->unidad_id  = 1;
+
+          
+          $configuracionDocente->calendario_id = 10;
+
+        //  $instrumentacionForm = [2,4,6];
+          $instrumentacionForm = [
+            1 => 2,
+            2 => 4,
+            3 => 6
+        ];
+        
+         //  $configuracionDocente->instrumentacion =  json_encode($instrumentacionForm);
+           
+
+          $configuracionDocente->save();
+          
+      }
+      
+
+       
+      return response()->json(['info' =>    $datosArray[0]['calendarioId']]);
     }
 
 
