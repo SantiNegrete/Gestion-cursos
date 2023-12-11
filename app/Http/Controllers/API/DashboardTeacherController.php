@@ -143,4 +143,19 @@ foreach ($instrumentacionForm as $id) {
             'message' => '123'
         ]);*/
     }
+
+    public function actualizar(Request $request)
+    {
+        // Puedes acceder a los datos enviados desde el frontend así:
+        $datosJSON = $request->input('data');
+
+        // Realiza la lógica de actualización o cualquier otra acción que necesites
+
+        // Devuelve una respuesta, por ejemplo:
+        return response()->json(['mensaje' => 'Actualización exitosa']);
+    }
+
+
+
+
 }
