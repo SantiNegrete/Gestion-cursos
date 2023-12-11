@@ -59,7 +59,7 @@
                     <div class="list-group-item">
                         <h5 class="mb-1">Instrumentación</h5>
                         <small>Instrumento {{ $i + 1 }}</small>
-                        <select class="form-control mt-2" wire:model="instrumentacionForm.{{ $data }}">
+                        <select class="form-control mt-2">
                             <option value="">Selecciona Instrumentación</option>
 
                             @foreach ($instrumentaciones as $instrumentacion)

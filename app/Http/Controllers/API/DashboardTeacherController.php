@@ -66,6 +66,40 @@ class DashboardTeacherController extends Controller
           
         }
 
+        $temas->load('configuracionDocente');
+        $temasRelacionDocentes = $temas->toArray();
+
+
+        if ($temas) {
+          foreach ($temas as $key => $value) {
+              if ($value->configuracionDocente) {
+      
+                  // Mover esta parte dentro del bucle para asegurar que se aplique a cada tema
+                  $instrumentacionForm =  json_decode($value->configuracionDocente->instrumentacion);
+                 
+              }
+          }
+      }
+
+      // Iteramos sobre el arreglo de ids
+foreach ($instrumentacionForm as $id) {
+  // Convertimos el id a entero para asegurarnos de que sea un número
+  $id = (int)$id;
+
+  // Buscamos el registro en el modelo Instrumentacion
+  $instrumentacion = Instrumentacion::find($id);
+
+  // Si encontramos el registro, lo agregamos al arreglo
+  if ($instrumentacion) {
+    $instrumentacionEncontrada[] = $instrumentacion->toArray();
+}
+}
+
+     
+
+
+
+
         
 
        // $configuracionesGuardadas = ConfiguracionDocente::where('docente_id', auth()->id())
@@ -90,6 +124,9 @@ class DashboardTeacherController extends Controller
             'numUnidades'  => $numUnidades,
 
             'configuracionDocente' =>  $configuracionDocente,
+            'temasRelacionDocentes' => $temasRelacionDocentes,
+           // 'instrumentacionForm' => $instrumentacionForm,
+            'InstrumentacionesUnidad' => $instrumentacionEncontrada,
         
             
 

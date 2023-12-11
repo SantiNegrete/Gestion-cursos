@@ -37,9 +37,6 @@ class ProfessorCreate extends Component
             $this->cambiarUnidad($this->unidadActual->id);
         }
 
-
-        dd($this->unidadActual);
-
         // $this->temasForm = [];
         $this->configuracionDocente = new ConfiguracionDocente();
     }
