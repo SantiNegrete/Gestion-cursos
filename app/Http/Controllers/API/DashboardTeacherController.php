@@ -148,7 +148,10 @@ foreach ($instrumentacionForm as $id) {
     {
        
         $datosJSON = $request->input('data');
+        $datosJSON2 = $request->input('data2');
+
         $datosArray = json_decode($datosJSON, true);
+        $datosArray2 = json_decode($datosJSON2, true);
        
          $temas =  $datosArray[0]['temas']; 
          $item = 0;
@@ -186,14 +189,24 @@ foreach ($instrumentacionForm as $id) {
           
           $configuracionDocente->calendario_id = 10;
 
-        //  $instrumentacionForm = [2,4,6];
-          $instrumentacionForm = [
+       
+       /*   $instrumentacionForm = [
             1 => 2,
-            2 => 4,
-            3 => 6
-        ];
+            2 => 1,
+            3 => 2,
+        ];*/
+
+        // Recorrer cada elemento de $datosArray2
+foreach ($datosArray2 as $indice => $elemento) {
+  // Verificar si la clave 'instrumentacion' está presente en el elemento
+  if (isset($elemento['instrumentacion'])) {
+      // Asignar el valor al nuevo array en la posición correspondiente
+      $instrumentacionForm[$indice + 1] = $elemento['instrumentacion'];
+  }
+}
+
         
-         //  $configuracionDocente->instrumentacion =  json_encode($instrumentacionForm);
+           $configuracionDocente->instrumentacion =  json_encode($instrumentacionForm);
            
 
           $configuracionDocente->save();
@@ -202,7 +215,7 @@ foreach ($instrumentacionForm as $id) {
       
 
        
-      return response()->json(['info' =>    $datosArray[0]['calendarioId']]);
+      return response()->json(['info' =>  $datosArray2]);
     }
 
 
